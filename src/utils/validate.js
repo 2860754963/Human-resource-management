@@ -1,5 +1,5 @@
 /**
- * Created by PanJiaChen on 16/11/18.
+ * Created by nigulasi on 15/11/22.
  */
 
 /**
@@ -17,4 +17,9 @@ export function isExternal(path) {
 export function validUsername(str) {
   const valid_map = ['admin', 'editor']
   return valid_map.indexOf(str.trim()) >= 0
+}
+
+// 校验手机号 规则
+export function validMobile(str) {
+  return /^1[3-9]\d{9}$/.test(str) // 校验手机号
 }

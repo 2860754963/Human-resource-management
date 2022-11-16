@@ -43,6 +43,12 @@ module.exports = {
       warnings: false,
       errors: true
     },
+    proxy: {
+      'api': {
+        target: 'http://ihrm-java.itheima.net/',
+        changeOrigin: true,///不需要路径重写
+      }
+    }
     // before: require('./mock/mock-server.js')
   },
   configureWebpack: {
@@ -53,6 +59,7 @@ module.exports = {
     name: name,
     resolve: {
       alias: {
+        //这里 都是 默认配置好的 @为src目录
         '@': resolve('src')
       }
     }
