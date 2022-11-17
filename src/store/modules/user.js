@@ -1,25 +1,51 @@
 // vuex存储token与token数据持久化
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { login } from '@/api/user'
+import { login, getuserinfo, getstaffinfo } from '@/api/user'
 const state = {
-  token: getToken()  ///需要对token建立快捷访问
+  token: getToken(), ///需要对token建立快捷访问
+  userinfo: {}
 }
 const mutations = {
+  // 设置token
   settoken(state, token) {
     state.token = token
     setToken(token)
   },
+  // 删除 token
   removetoken(state) {
     state.token = null
     removeToken()
+  },
+  // 设置 userinfo
+  setuserinfo(state, payload) {
+    state.userinfo = payload
+    // state.userinfo = { ...payload }
+  },
+  // 删除 userinfo
+  removeuserinfo(state) {
+    state.userinfo = {}
   }
 }
 const actions = {
+  // 登录
   async login(context, layload) {///context，在这里就代表看了 this.$store
     const res = await login(layload) ///因为axios默认套上一层 data，在相应拦截器中 进行处理了
     context.commit('settoken', res)
+  },
 
+  // 获取用户信息
+  async userinfo(context) {
+    const res = await getuserinfo() //获取基本资料
+    const result = await getstaffinfo(res.userId) //获取员工基本信息
+    context.commit('setuserinfo', { ...res, ...result })
+    return res ////这里进行铺垫 只需要基本资料就可以
+  },
+  // 退出登录
+  logout(context) {
+    context.commit('removetoken')
+    context.commit('removeuserinfo')
   }
+
 }
 
 

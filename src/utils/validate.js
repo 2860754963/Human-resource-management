@@ -20,6 +20,11 @@ export function validUsername(str) {
 }
 
 // 校验手机号 规则
+/**
+ * 
+ * @param {*} str 这里传入的是手机号
+ * @returns  返回布尔值
+ */
 export function validMobile(str) {
   return /^1[3-9]\d{9}$/.test(str) // 校验手机号
 }

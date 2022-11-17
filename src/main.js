@@ -15,6 +15,15 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+/*
+自定义指令 的 全部  全局注册
+*/
+import * as directives from '@/directives'
+// Object.keys(directives)  这个得到的是一个  包含 imageerror 的数组
+Object.keys(directives).forEach(value => { ///value 就是数组中的每一项 ，就是 imageerror
+  Vue.directive(value, directives[value])
+})
+console.log();
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

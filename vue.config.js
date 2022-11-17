@@ -45,7 +45,8 @@ module.exports = {
     },
     proxy: {
       'api': {
-        target: 'http://ihrm-java.itheima.net/',
+        target: 'http://ihrm.itheima.net/',
+        // target: 'http://ihrm-java.itheima.net/',
         changeOrigin: true,///不需要路径重写
       }
     }
