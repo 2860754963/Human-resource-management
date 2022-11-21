@@ -1,5 +1,5 @@
 // vuex存储token与token数据持久化
-import { getToken, setToken, removeToken } from '@/utils/auth'
+import { getToken, setToken, removeToken, settimekey } from '@/utils/auth'
 import { login, getuserinfo, getstaffinfo } from '@/api/user'
 const state = {
   token: getToken(), ///需要对token建立快捷访问
@@ -30,7 +30,10 @@ const actions = {
   // 登录
   async login(context, layload) {///context，在这里就代表看了 this.$store
     const res = await login(layload) ///因为axios默认套上一层 data，在相应拦截器中 进行处理了
-    context.commit('settoken', res)
+    context.commit('settoken', res) //得到token 写入时间戳
+    settimekey()///写入时间戳，在token注入的时候进行验证
+
+
   },
 
   // 获取用户信息

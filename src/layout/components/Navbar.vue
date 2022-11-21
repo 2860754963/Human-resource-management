@@ -7,7 +7,7 @@
     />
     <div class="app-breadcrumb">
       济源尼古拉丝教育科技股份有限公司
-      <span class="breadBtn">体验版</span>
+      <span class="breadBtn">内测开发版：0.0.0.5</span>
     </div>
     <!-- <breadcrumb class="breadcrumb-container" /> -->
     <div class="right-menu">
@@ -43,12 +43,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-// import Breadcrumb from "@/components/Breadcrumb";
+
 import Hamburger from "@/components/Hamburger";
 
 export default {
   components: {
-    // Breadcrumb,
     Hamburger,
   },
   computed: {
@@ -65,7 +64,7 @@ export default {
   },
   data() {
     return {
-      defaultImg: require("@/assets/common/head.jpg"), ///通过加载的方式读取
+      defaultImg: require("@/assets/common/head.jpg"), ///通过加载的方式读取 是node 中的写法
     };
   },
 };

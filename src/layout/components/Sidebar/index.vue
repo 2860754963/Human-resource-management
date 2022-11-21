@@ -12,6 +12,9 @@
         :collapse-transition="false"
         mode="vertical"
       >
+        <!-- sidebar-item 是组件引入 
+        routes是 路由数组规则 里边是每一个对象
+        -->
         <sidebar-item
           v-for="route in routes"
           :key="route.path"
@@ -34,6 +37,7 @@ export default {
   computed: {
     ...mapGetters(["sidebar"]),
     routes() {
+      ///这里是 拿到路由规则数组
       return this.$router.options.routes;
     },
     activeMenu() {

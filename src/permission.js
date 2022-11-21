@@ -12,29 +12,23 @@ import store from '@/store'
 import NProgress from 'nprogress' // 引入一份进度条插件
 import 'nprogress/nprogress.css' // 引入进度条样式
 let whitelist = ['/login', '/404']
+// 前置守卫
 router.beforeEach(async function (to, from, next) {
     NProgress.start() // 开启进度条
     // 先判断token
-    if (store.getters.token) {
-        // 如果存在token
-        if (to.path === '/login') {
-            // 如果去登录页,跳到主页
+    if (store.getters.token) {// 如果存在token
+        if (to.path === '/login') {// 如果去登录页,跳到主页
             next('/')
-        } else {
-            // 否则放行
-            if (!store.getters.userid) {
-                // 如果信息不存在的话，就调用 userinfo
+        } else {// 否则放行
+            if (!store.getters.userid) {// 如果信息不存在的话，就调用 userinfo
                 await store.dispatch('user/userinfo')
             }
             next()
         }
-    } else {
-        // 没有token
-        if (whitelist.includes(to.path)) {
-            // 如果在白名单
+    } else {// 没有token
+        if (whitelist.includes(to.path)) {// 如果在白名单
             next()
-        } else {
-            // 否则跳转到登录页
+        } else { // 否则跳转到登录页
             next('/login')
         }
     }
