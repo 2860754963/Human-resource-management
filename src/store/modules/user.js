@@ -40,6 +40,7 @@ const actions = {
   async userinfo(context) {
     const res = await getuserinfo() //获取基本资料
     const result = await getstaffinfo(res.userId) //获取员工基本信息
+    console.log(result);
     context.commit('setuserinfo', { ...res, ...result })
     return res ////这里进行铺垫 只需要基本资料就可以
   },
