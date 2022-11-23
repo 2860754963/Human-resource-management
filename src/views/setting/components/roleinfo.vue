@@ -28,7 +28,7 @@
     <!-- 分页 -->
     <el-pagination
       background
-      layout="prev, pager, next"
+      layout="total,prev, pager, next"
       :total="page.total"
       :page-size="page.pagesize"
       :current-page="page.page"
@@ -52,7 +52,7 @@ export default {
       page: {
         // 放置页码及相关数据
         page: 1, //当前页
-        pagesize: 2, //每页条目数
+        pagesize: 8, //每页条目数
         total: 0, // 记录总数
       },
     };

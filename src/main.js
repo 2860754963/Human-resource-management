@@ -24,7 +24,7 @@ Object.keys(directives).forEach(value => {
   ///value 就是数组中的每一项 ，就是 imageerror
   Vue.directive(value, directives[value])
 })
-console.log();
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -44,7 +44,15 @@ Vue.use(ElementUI, { locale })
 // Vue.use(ElementUI)
 
 Vue.config.productionTip = false
+// 全局注册组件
+import Component from '@/components'
+Vue.use(Component) // 注册自己的插件，这个use方法会调用上边的install
 
+// 全局 循环注册 监听器
+import * as filters from '@/filters'
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 new Vue({
   el: '#app',
   router,
