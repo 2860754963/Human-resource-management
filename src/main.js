@@ -39,9 +39,10 @@ Object.keys(directives).forEach(value => {
 // }
 
 // set ElementUI lang to EN
-Vue.use(ElementUI, { locale })
+// 这里  将el 的 组件 设置为  英文了
+// Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
-// Vue.use(ElementUI)
+Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 // 全局注册组件

@@ -64,6 +64,15 @@ export const constantRoutes = [///静态路由
       meta: { title: 'Dashboard', icon: 'dashboard' }
     }]
   },
+  {
+    path: '/import',
+    component: Layout,
+    hidden: true,
+    children: [{
+      path: '',
+      component: () => import('@/views/import'),
+    }]
+  },
 
   // 404页必须放在末尾！！！
   { path: '*', redirect: '/404', hidden: true }

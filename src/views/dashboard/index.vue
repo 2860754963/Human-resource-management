@@ -2,8 +2,9 @@
   <div class="dashboard-container">
     <div class="dashboard-text">name: {{ name }}</div>
     <pagetools :showBefore="true">
-      <span slot="before">我想你们</span></pagetools
-    >
+      <span slot="before">我想你们</span>
+    </pagetools>
+    <imageupload></imageupload>
   </div>
 </template>
 

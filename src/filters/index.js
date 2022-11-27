@@ -1,7 +1,8 @@
 // import parseTime, formatTime and set to filter
-
+// 导入parseTime、formatTime并设置为筛选器
 /**
  * Show plural label if time is plural number
+ * 如果时间是复数，则显示复数标签
  * @param {number} time
  * @param {string} label
  * @return {string}
