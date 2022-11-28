@@ -50,8 +50,8 @@ export default {
       var cos = new COS({
         ///根据依赖包 new 出对象
 
-        SecretId: "AKID36896aCrVHz7oeO8rZI7Vux6DSg2Txoe", // 身份识别 ID
-        SecretKey: "ztrmbGjAiEjFwkhXTSTYm005Ouz7FSg0", // 身份密钥
+        SecretId: "", // 身份识别 ID
+        SecretKey: "", // 身份密钥
       });
       if (params) {
         // https://cloud.tencent.com/document/product/436/64960  文件上传介绍
