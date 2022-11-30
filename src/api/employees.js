@@ -90,6 +90,16 @@ export function updateJob(data) {
 }
 
 
-// jobinfo
-
+/**
+ * 
+ * 给 用户分配角色
+ * 
+ */
+export function assignRoles(data) {
+    return request({
+        url: '/sys/user/assignRoles',
+        data,
+        method: 'put'
+    })
+}
 

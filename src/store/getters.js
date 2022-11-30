@@ -7,5 +7,12 @@ const getters = {
   userid: state => state.user.userinfo.userId, ///用户id映射
   staffphoto: state => state.user.userinfo.staffPhoto,///用户头像映射
   compantid: state => state.user.userinfo.companyId,///企业id 映射
+  /**
+   * 来自于 router/index.js
+   *11. 导出 最新的路由，作为菜单的路由
+  
+  12.Sidebar\index.vue
+   */
+  routes: state => state.permission.routes // 导出当前的路由
 }
 export default getters

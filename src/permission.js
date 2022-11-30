@@ -20,8 +20,23 @@ router.beforeEach(async function (to, from, next) {
         if (to.path === '/login') {// 如果去登录页,跳到主页
             next('/')
         } else {// 否则放行
-            if (!store.getters.userid) {// 如果信息不存在的话，就调用 userinfo
-                await store.dispatch('user/userinfo')
+            if (!store.getters.userid) {// 如果信息不存在的话，就调用 userinfo 获取用户信息
+                /**来自于store下的 permission.js
+                 *  // 9.将  获取的 信息进行 结构 ，用于 路由权限的筛选
+                 */
+
+                const { roles } = await store.dispatch('user/userinfo')
+                console.log(roles);
+                const routes = await store.dispatch('permission/filterRoutes', roles.menus)
+                console.log(routes);
+                router.addRoutes(routes) //添加动态路由到路由表
+                // addRoutes  必须 用 next(地址) 不能用next()  (这是一个已知缺陷)
+                // 跳转到 要去的路径 这是一个bug , 如果使用了addRoutes之后, 必须使用next(to.path)来跳转到要去的路径, 不能使用next()
+                next(to.path)
+                return
+                /**
+                 * 10   router/index.js
+                 */
             }
             next()
         }

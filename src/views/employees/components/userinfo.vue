@@ -484,7 +484,7 @@ export default {
       }
       await updatePersonal({
         ...this.formData,
-        staffPhoto: fileList && fileList.length ? fileList[0].url : " ",
+        staffPhoto: fileList && fileList.length ? fileList[0].url : "  ",
         //这里是一个空格字符串，接口问题，如果没有头像，也不能是空字符串，必须是一个空格
       });
       this.$message.success("保存成功");

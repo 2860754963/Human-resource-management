@@ -26,9 +26,27 @@
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="个人详情" name="second">
+        <!-- 放置打印组件 -->
+        <el-row type="flex" justify="end">
+          <el-tooltip content="打印个人基本信息">
+            <!-- el-tooltip 组件 是文字提示 常用于展示鼠标 hover 时的提示信息。 -->
+            <router-link :to="`/employees/print/${userid}?type=personal`"
+              ><i class="el-icon-printer"></i
+            ></router-link>
+          </el-tooltip>
+        </el-row>
         <component :is="userinfo_index"></component>
       </el-tab-pane>
       <el-tab-pane label="岗位信息" name="third">
+        <!-- 放置打印组件 -->
+        <el-row type="flex" justify="end">
+          <el-tooltip content="打印个人岗位信息">
+            <!-- el-tooltip 组件 是文字提示 常用于展示鼠标 hover 时的提示信息。 -->
+            <router-link :to="`/employees/print/${userid}?type=job`"
+              ><i class="el-icon-printer"></i
+            ></router-link>
+          </el-tooltip>
+        </el-row>
         <component :is="jobinfo_index"></component>
       </el-tab-pane>
     </el-tabs>

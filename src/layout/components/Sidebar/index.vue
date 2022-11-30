@@ -35,11 +35,17 @@ import variables from "@/styles/variables.scss";
 export default {
   components: { SidebarItem, Logo },
   computed: {
-    ...mapGetters(["sidebar"]),
-    routes() {
-      ///这里是 拿到路由规则数组
-      return this.$router.options.routes;
-    },
+    /**来自于 store/getters.js
+     * 12  路由更新 后 菜单更新
+     * 将  原先的routes 屏蔽
+     *
+     * 注意：必须将 路由name 与 得到的权限菜单数据一致，才可以显示对应的菜单
+     */
+    ...mapGetters(["sidebar", "routes"]), ///addRoutes给routes添加的路由，不是响应式的，需要通过mapGetters引入的这种方式才可以
+    // routes() {
+    //   ///这里是 拿到路由规则数组
+    //   return this.$router.options.routes;
+    // },
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;

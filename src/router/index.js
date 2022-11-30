@@ -61,7 +61,7 @@ export const constantRoutes = [///静态路由
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
   {
@@ -75,12 +75,12 @@ export const constantRoutes = [///静态路由
   },
 
   // 404页必须放在末尾！！！
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 /*
 
  */
-export const asyncRoutes = [//动态路由定义
+export const asyncRoutes = [//动态路由定义,这个是 所有的路由
   approvalsRouter,
   departmentsRouter,
   employeesRouter,
@@ -93,13 +93,19 @@ export const asyncRoutes = [//动态路由定义
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes, ...asyncRoutes]//动静路由合并
+  /**
+   * 10.来自于 src/permission.js  路由判断 完成后，将原先的 动静合并删除 动态的
+   */
+  routes: [...constantRoutes]//动静路由合并
+  /**
+   * 11. 更新左侧菜单 store/getters.js
+   */
 })
 
 const router = createRouter()
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
-export function resetRouter() {
+export function resetRouter() {///// 模板自带 的 默认重置路由的方法
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }

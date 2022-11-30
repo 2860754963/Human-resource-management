@@ -15,7 +15,7 @@ export const imageerror = {
             dom.src = options.value
         }
     },
-    componentUpdated(dom, options) {
+    componentUpdated(dom, options) {///钩子函数，在组件 更新完毕之后执行
         dom.src = dom.src || options.value
     }
 }

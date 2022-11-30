@@ -2,7 +2,7 @@
 // 左侧导航栏 会根据 路由规则 数量进行 循环输出
 export default {
     path: '/permission',
-    name: 'permission', // 给路由规则加一个name
+    name: 'permissions', // 给路由规则加一个name
     component: () => import('@/layout'),
     children: [{
         path: '',///默认子路由

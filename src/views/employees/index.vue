@@ -39,7 +39,7 @@
                   height: 100px;
                   padding: 10px;
                 "
-                alt=""
+                @click="showcode(row.staffPhoto)"
               />
             </template>
           </el-table-column>
@@ -132,7 +132,9 @@
               <el-button type="text" size="small">转正</el-button>
               <el-button type="text" size="small">调岗</el-button>
               <el-button type="text" size="small">离职</el-button>
-              <el-button type="text" size="small">角色</el-button>
+              <el-button type="text" size="small" @click="role(scope.row)"
+                >角色</el-button
+              >
               <el-button
                 type="text"
                 size="small"
@@ -161,6 +163,15 @@
       </el-card>
     </div>
     <addroles ref="addroles"></addroles>
+    <el-dialog title="头像二维码" :visible.sync="dialogVisible" width="30%">
+      <el-row type="flex" justify="center">
+        <canvas ref="canvas" />
+      </el-row>
+      <el-row type="flex" justify="center">
+        建议使用微信扫码，查看头像！
+      </el-row>
+    </el-dialog>
+    <assignrole ref="assignrole"></assignrole>
   </div>
 </template>
 
@@ -170,8 +181,29 @@ import EmployeeEnum from "@/api/constant/employees";
 import addroles from "./components/addroles.vue";
 // 处理导出时间
 import { formatDate } from "@/filters";
+import QrCode from "qrcode";
+import assignrole from "./components/assign_role.vue";
 export default {
   methods: {
+    async role(row) {
+      this.showroledialog = true;
+      this.$refs.assignrole.userinfo = row;
+      await this.$refs.assignrole.getstaffinfo(row.id);
+      this.$refs.assignrole.showroledialog = true;
+    },
+    showcode(staff) {
+      if (staff) {
+        this.dialogVisible = true;
+
+        this.$nextTick(() => {
+          // 此时可以确认已经有ref对象了
+          QrCode.toCanvas(this.$refs.canvas, staff); // 将地址转化成二维码
+          // 如果转化的二维码后面信息 是一个地址的话 就会跳转到该地址 如果不是地址就会显示内容
+        });
+      } else {
+        this.$message.warning("该用户还未上传头像");
+      }
+    },
     daochu() {
       // // 懒导入 第三方工具 ，成功后 执行  回调函数
       // import("@/vendor/Export2Excel").then(async (excel) => {
@@ -285,6 +317,8 @@ export default {
 
   data() {
     return {
+      showroledialog: false,
+      dialogVisible: false,
       tableData: [],
       page: {
         page: 1, // 当前页码
@@ -300,6 +334,7 @@ export default {
   computed: {},
   components: {
     addroles,
+    assignrole,
   },
 };
 </script>

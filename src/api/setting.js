@@ -51,5 +51,12 @@ export function addroles(data) {
         data
     })
 }
-
+// 给角色分配 权限
+export function assignPerm(data) {
+    return request({
+        url: '/sys/role/assignPrem',
+        method: 'PUT',
+        data
+    })
+}
 

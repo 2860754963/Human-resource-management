@@ -1,6 +1,8 @@
 // vuex存储token与token数据持久化
 import { getToken, setToken, removeToken, settimekey } from '@/utils/auth'
 import { login, getuserinfo, getstaffinfo } from '@/api/user'
+// 重置 路由
+import { resetRouter } from '@/router'
 const state = {
   token: getToken(), ///需要对token建立快捷访问
   userinfo: {}
@@ -45,9 +47,12 @@ const actions = {
     return res ////这里进行铺垫 只需要基本资料就可以
   },
   // 退出登录
+
   logout(context) {
     context.commit('removetoken')
     context.commit('removeuserinfo')
+    resetRouter()
+    context.commit('permission/setroutes', [], { root: true })
   }
 
 }
