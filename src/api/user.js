@@ -24,6 +24,10 @@ export function getstaffinfo(id) {
     })
 }
 
-export function logout() {
-
+export function getUserDetailById(id) {
+    return request({
+        ///需要请求头
+        url: `/sys/user/${id}`
+        // 因为axios 默认提交方式就是 get 所以可以不用写
+    })
 }

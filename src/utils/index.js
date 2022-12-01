@@ -136,6 +136,20 @@ export function translisttree(list, value) {
   return arr
 }
 
+export function tranListToTreeData(list, value) {
+  var arr = []
+  list.forEach(item => {
+    if (item.pid === value) {
+      const children = tranListToTreeData(list, item.id)////在这里调用自身，传的值不一样
+      if (children.length) {
+        item.children = children
+      }
+      arr.push(item)
+    }
+  })
+  return arr
+}
+
 
 /*
 递归算法解释

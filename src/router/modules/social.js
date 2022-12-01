@@ -1,16 +1,50 @@
-// 进行 路由对象的导出
-// 左侧导航栏 会根据 路由规则 数量进行 循环输出
+
+import Layout from '@/layout'
+
 export default {
-    path: '/social',
-    name: 'social_securitys', // 给路由规则加一个name
-    component: () => import('@/layout'),
-    children: [{
-        path: '',///默认子路由
-        component: () => import('@/views/social'),
-        meta: { // meta属性的里面的属性  随意定义
-            //   左侧导航会读取我们的路由里的meta里面的title作为显示菜单名称
-            title: '社保管理',
-            icon: 'table'
-        }
-    }]
+  path: '/social_securitys',
+  component: Layout,
+  name: 'social_securitys',
+  children: [
+    {
+      path: '',
+      component: () => import('@/views/social'),
+      name: 'social_securitys',
+      meta: {
+        title: '社保',
+        icon: 'table'
+
+      }
+    },
+    // 报表
+    {
+      path: 'detail/:id',
+      hidden: true,
+      component: () => import('@/views/social/detail'),
+      name: 'socialDetail',
+      meta: {
+        title: '社保'
+      }
+    },
+    // 历史归档
+    {
+      path: 'historicalArchiving',
+      hidden: true,
+      component: () => import('@/views/social/historical'),
+      name: 'socialHistorical',
+      meta: {
+        title: '历史归档'
+      }
+    },
+    // 月报表
+    {
+      path: 'monthStatement',
+      component: () => import('@/views/social/month'),
+      name: 'socialMonthStatement',
+      hidden: true,
+      meta: {
+        title: '当月报表'
+      }
+    }
+  ]
 }

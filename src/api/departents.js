@@ -6,6 +6,12 @@ export function getdepartments() {
     })
 }
 
+export function getDepartments() {
+    return request({
+        url: '/company/department'
+    })
+}
+
 // 删除 部门 （根据ID删除部门）
 export function deldepartments(id) {
     return request({
