@@ -29,7 +29,7 @@ router.beforeEach(async function (to, from, next) {
                 console.log(roles);
                 const routes = await store.dispatch('permission/filterRoutes', roles.menus)
                 console.log(routes);
-                router.addRoutes(routes) //添加动态路由到路由表
+                router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }]) //添加动态路由到路由表
                 // addRoutes  必须 用 next(地址) 不能用next()  (这是一个已知缺陷)
                 // 跳转到 要去的路径 这是一个bug , 如果使用了addRoutes之后, 必须使用next(to.path)来跳转到要去的路径, 不能使用next()
                 next(to.path)

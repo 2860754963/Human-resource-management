@@ -15,6 +15,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import checkbtnpermission from './mixin/checkbtnpermission'///导入 检查按钮权限 混入
+Vue.mixin(checkbtnpermission)////全局使用
 /*
 自定义指令 的 全部  全局注册
 */

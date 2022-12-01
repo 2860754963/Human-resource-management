@@ -17,6 +17,7 @@
             size="small"
             type="primary"
             @click="$refs.addroles.dialogFormVisible = true"
+            :disabled="!checkbtnpermission('add-user')"
             >+ 新增员工</el-button
           >
         </div>

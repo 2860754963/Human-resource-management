@@ -15,7 +15,12 @@
               操作<i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item command="add">添加部门</el-dropdown-item>
+              <!-- add-dept -->
+              <el-dropdown-item
+                command="add"
+                :disabled="!checkbtnpermission('add-dept')"
+                >添加部门</el-dropdown-item
+              >
               <el-dropdown-item v-if="!isRoot" command="del"
                 >删除部门</el-dropdown-item
               >
