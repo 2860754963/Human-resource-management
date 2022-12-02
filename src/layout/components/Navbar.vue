@@ -5,12 +5,20 @@
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
+
     <div class="app-breadcrumb">
       济源尼古拉丝教育科技股份有限公司
       <span class="breadBtn">内测开发版：0.0.0.5</span>
     </div>
     <!-- <breadcrumb class="breadcrumb-container" /> -->
+
     <div class="right-menu">
+      <!-- 放置全屏组件 -->
+      <screenfull class="screenfull"></screenfull>
+      <!--放置换肤组件 -->
+      <themepick class="themepicker"></themepick>
+      <!-- 放置 奇幻语言组件 -->
+      <lang class="language"></lang>
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
           <img
@@ -71,6 +79,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.language {
+  position: absolute;
+  top: 5px;
+  right: 321px;
+}
+.themepicker {
+  position: absolute;
+  top: 16px;
+  right: 368px;
+}
+.screenfull {
+  position: absolute;
+  top: 22px;
+  right: 180px;
+}
 .navbar {
   height: 50px;
   overflow: hidden;

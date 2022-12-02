@@ -9,6 +9,8 @@
     <div class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <navbar />
+        <!-- 放置 多标签页 -->
+        <tags-view />
       </div>
       <app-main />
     </div>

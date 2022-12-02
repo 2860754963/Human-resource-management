@@ -6,6 +6,7 @@ export default {
     component: () => import('@/layout'),
     children: [{
         path: '',///默认子路由
+        name: 'employees',
         component: () => import('@/views/employees'),
         meta: { // meta属性的里面的属性  随意定义
             //   左侧导航会读取我们的路由里的meta里面的title作为显示菜单名称

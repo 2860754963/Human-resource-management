@@ -53,6 +53,7 @@ const actions = {
     context.commit('removeuserinfo')
     resetRouter()
     context.commit('permission/setroutes', [], { root: true })///子模块访问另一个 子模块的 mutations里的函数
+    context.dispatch('tagsView/delAllViews', null, { root: true })/////清空多标签页
   }
 
 }

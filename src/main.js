@@ -31,20 +31,28 @@ Object.keys(directives).forEach(value => {
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
  * you can execute: mockXHR()
- *
+ **如果您不想使用模拟服务器*，您想使用MockJs作为模拟api*，您可以执行：mockXHR（）
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
+ * 目前，MockJ将在生产环境中使用，*请在联机前删除它！
  */
 // if (process.env.NODE_ENV === 'production') {
 //   const { mockXHR } = require('../mock')
 //   mockXHR()
 // }
 
+// 当我们全局注册i18n的时候，每个组件都会拥有一个 ** `$t` ** 的方法，
+// 导入 多国语言组件
+import i18n from '@/lang'
+Vue.use(ElementUI, {
+  // t方法是去找 对应的语言下的值 去显示
+  i18n: (key, value) => i18n.t(key, value)
+})
 // set ElementUI lang to EN
 // 这里  将el 的 组件 设置为  英文了
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 
 Vue.config.productionTip = false
 // 全局注册组件
@@ -60,5 +68,6 @@ new Vue({
   el: '#app',
   router,
   store,
+  i18n,
   render: h => h(App)
 })

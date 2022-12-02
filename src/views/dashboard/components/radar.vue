@@ -53,7 +53,7 @@ export default {
           // areaStyle: {normal: {}},
           data: [
             {
-              value: [10, 1, 100, 5, 100, 0],
+              value: [30, 35, 20, 45, 60, 55],
               name: "张三",
             },
             {

@@ -12,9 +12,12 @@
           :index="resolvePath(onlyOneChild.path)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
         >
+          <!-- 左侧菜单显示 循环项 文字图标 :title="onlyOneChild.meta.title"   :title="$t('route.' + onlyOneChild.name)"-->
+          <!-- $t是i18n的t方法，是在实例化vue的时候，将i18n挂载到vue身上了，然后将i18n的t方法转化为vue的$t方法 -->
+          <!-- $t()方法可以传递带点的字符串，表示查询嵌套（对象）结构的值：$t(key1.key2.key3...) -->
           <item
             :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)"
-            :title="onlyOneChild.meta.title"
+            :title="$t('route.' + onlyOneChild.name)"
           />
         </el-menu-item>
       </app-link>

@@ -87,10 +87,20 @@
             <span>流程申请</span>
           </div>
           <div class="sideNav">
-            <el-button class="sideBtn">加班离职</el-button>
-            <el-button class="sideBtn">请假调休</el-button>
-            <el-button class="sideBtn">审批列表</el-button>
-            <el-button class="sideBtn">我的信息</el-button>
+            <el-button class="sideBtn" @click="showDialog = true"
+              >离职申请</el-button
+            >
+            <el-button class="sideBtn" @click="$router.push('/attendances')"
+              >请假调休</el-button
+            >
+            <el-button class="sideBtn" @click="$router.push('/approvals')"
+              >审批列表</el-button
+            >
+            <el-button
+              class="sideBtn"
+              @click="$router.push(`employees/detail/${userinfo.id}`)"
+              >我的信息</el-button
+            >
           </div>
         </el-card>
 
@@ -132,6 +142,37 @@
         </el-card>
       </el-col>
     </el-row>
+    <!-- 离职申请 弹出层 -->
+    <el-dialog :visible="showDialog" title="离职申请" @close="btnCancel">
+      <!-- 放置表单 -->
+      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+        <el-form-item label="离职时间" prop="time">
+          <!-- 放置 日期选择器  datetime 选择日期时间-->
+          <el-date-picker
+            v-model="form.time"
+            type="datetime"
+            value-format="yyyy-MM-dd HH:mm:ss"
+            placeholder="请选择离职时间"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="离职原因" prop="reason">
+          <!-- 放置 文字域 -->
+          <el-input
+            v-model="form.reason"
+            type="textarea"
+            placeholder="请输入离职原因"
+          />
+        </el-form-item>
+      </el-form>
+      <!-- 放置 离职按钮 -->
+      <el-row slot="footer" type="flex" justify="center">
+        <el-col>
+          <el-button type="primary" @click="btnOK">确定</el-button>
+          <el-button @click="btnCancel">取消</el-button>
+        </el-col>
+      </el-row>
+    </el-dialog>
   </div>
 </template>
 
@@ -141,6 +182,8 @@ import { createNamespacedHelpers } from "vuex";
 const { mapState } = createNamespacedHelpers("user");
 import workdata from "./components/work_data.vue";
 import Radar from "./components/radar";
+// dao入离职审批 api
+import { startProcess } from "@/api/approvals";
 export default {
   name: "Dashboard",
 
@@ -151,13 +194,42 @@ export default {
   data() {
     return {
       defaultimg: require("@/assets/common/head.jpg"),
+      showDialog: false,
+      form: {
+        time: "",
+        reason: "",
+        processKey: "process_dimission", // 特定的审批
+        processName: "离职",
+      },
+      rules: {
+        time: [
+          { required: true, message: "离职时间不能为空", trigger: "blur" },
+        ],
+        reason: [
+          { required: true, message: "离职原因不能为空", trigger: "blur" },
+        ],
+      },
+      value1: "",
+      reason: "",
     };
   },
   components: {
     workdata,
     Radar,
   },
-  methods: {},
+  methods: {
+    async btnOK() {
+      await this.$refs.form.validate();
+      const data = { ...this.form, userId: this.userinfo.userId };
+      const res = await startProcess(data);
+      console.log(res);
+      this.$message.success("提交流程成功");
+      this.showDialog = false;
+    },
+    btnCancel() {
+      this.showDialog = false;
+    },
+  },
   created() {},
 };
 </script>
