@@ -4,7 +4,8 @@ import store from "@/store";
 import { gettimekey } from '@/utils/auth'
 import router from "@/router";
 const serve = Axios.create({
-    baseURL: 'http://localhost:8888' + process.env.VUE_APP_BASE_API, ///因为 开发环境和生产环境所使用的  加载配置文件 中都有 这个VUE_APP_BASE_API变量
+    // baseURL: 'http://localhost:8888' + process.env.VUE_APP_BASE_API, ///因为 开发环境和生产环境所使用的  加载配置文件 中都有 这个VUE_APP_BASE_API变量
+    baseURL: process.env.VUE_APP_BASE_API, ///因为 开发环境和生产环境所使用的  加载配置文件 中都有 这个VUE_APP_BASE_API变量
     // baseURL: process.env.VUE_APP_BASE_API, ///因为 开发环境和生产环境所使用的  加载配置文件 中都有 这个VUE_APP_BASE_API变量
     timeout: 5000,////设置超时时间
 })

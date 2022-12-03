@@ -26,12 +26,12 @@ if (isproduce) {
   cdn = {
     css: [ // 放置css文件目录
       // element-ui css
-      'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+      'https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css'
     ],
     js: [// 放置js文件目录
       // vue must at first! vue必须放在第一位
       'https://unpkg.com/vue@2.6.10/dist/vue.js', // vuejs //***vue必须是带版本的 , 默认的3.x不行, 会报错***
-      'https://unpkg.com/element-ui/lib/index.js', // elementUI
+      'https://unpkg.com/element-ui@2.13.2/lib/index.js', // elementUI
       //xlsx
       'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/jszip.min.js',
       'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/xlsx.full.min.js'
