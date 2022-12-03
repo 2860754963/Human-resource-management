@@ -8,22 +8,45 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'vue Admin Template' // page title 网页标题
 
-// If your port is set to 80,
-// use administrator privileges to execute the command line.
-// For example, Mac: sudo npm run
-// You can change the port by the following methods:
-// port = 9528 npm run dev OR npm run dev --port = 9528
+
 const port = process.env.port || process.env.npm_config_port || 9528 // dev port
+// 2.定义cdn ，并 通过环境变量 进行判断  是否使用cdn，因为在 开发模式是不需要cdn ，在生产模式需要cdn
+let cdn = { css: [], js: [] } ///先定义 空对象
+const isproduce = process.env.NODE_ENV === 'production' ///进行判断
+let externals = {}
+if (isproduce) {
+  //在生产模式 需要将大的包排除，并通过cdn获取
+  //key（要排除的包名）：value（引入的cdn的包的全局变量名）
+  externals = {
+    'vue': 'Vue',
+    'element-ui': 'ELEMENT',
+    'xlsx': 'XLSX'
+  }
+  ///引入cdn
+  cdn = {
+    css: [ // 放置css文件目录
+      // element-ui css
+      'https://unpkg.com/element-ui/lib/theme-chalk/index.css'
+    ],
+    js: [// 放置js文件目录
+      // vue must at first! vue必须放在第一位
+      'https://unpkg.com/vue@2.6.10/dist/vue.js', // vuejs //***vue必须是带版本的 , 默认的3.x不行, 会报错***
+      'https://unpkg.com/element-ui/lib/index.js', // elementUI
+      //xlsx
+      'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/jszip.min.js',
+      'https://cdn.jsdelivr.net/npm/xlsx@0.16.6/dist/xlsx.full.min.js'
+    ]
+  }
+  // 接下来处理 生产模式下的  引入文件，就是在生产模式下，将cdn的css和js注入到 html中
+
+  // 通过 html-webpack-plugin注入到 index.html之中:
+
+
+}
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   /**
-   * You will need to set publicPath if you plan to deploy your site under a sub path,
-   * for example GitHub Pages. If you plan to deploy your site to https://foo.github.io/bar/,
-   * then publicPath should be set to "/bar/".
-   * In most cases please use '/' !!!
-   * Detail: https://cli.vuejs.org/config/#publicpath
-   * 
    * 如果您计划在子路径下部署站点，
    *例如GitHub Pages，则需要设置publicPath如果您计划将站点部署到https://foo.github.io/bar/，
    *则publicPath应设置为“/bar/”
@@ -64,10 +87,27 @@ module.exports = {
         //这里 都是 默认配置好的 @为src目录
         '@': resolve('src')
       }
-    }
+    },
+    // 1.最后项目打包上线： 1.因为打包时 vue，elui ，xlsx占用体积大，所以将其排除 使用线上（CND地址）下载样式资源
+    // cdn资源--element：https://unpkg.com/element-ui/lib/index.js
+    externals: externals
+
   },
+  // 3.进行注入
+  // 配置注入webpack的属性 这个属性会注入到模板的变量中
   chainWebpack(config) {
-    // it can improve the speed of the first screen, it is recommended to turn on preload
+
+    // 插入cdn变量
+    // args 就是原有注入模板中的变量
+    config.plugin('html').tap(args => {
+      // args[0] 相当于 html模板中 htmlWebpackplugin.options
+      args[0].cdn = cdn// 将cdn变量注入到html模板中
+      return args
+    })
+    // 4.接下来 在puiblic/index.html 中进行配置
+
+
+    // 它可以提高第一个屏幕的速度，建议打开预加载
     config.plugin('preload').tap(() => [
       {
         rel: 'preload',

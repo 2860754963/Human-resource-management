@@ -37,6 +37,8 @@ import { asyncRoutes } from '@/router'
 const actions = {
     /**
      * 8.筛选路由(菜单筛选), 第二个参数 是 当前用户 所拥有的 菜单权限
+     * 
+     * 去往 src /permission.js
      */
 
     filterRoutes(context, muenus) {

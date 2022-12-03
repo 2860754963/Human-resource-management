@@ -94,7 +94,8 @@ export const asyncRoutes = [//动态路由定义,这个是 所有的路由
   settingRouter
 ]
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
+  mode: 'history', // require service support需要服务支持
+  base: '/hr/', // 一般项目发布的时候，都会添加一个统一的前缀，所以我们这里配置一个hr
   scrollBehavior: () => ({ y: 0 }),
   /**
    * 10.来自于 src/permission.js  路由判断 完成后，将原先的 动静合并删除 动态的
